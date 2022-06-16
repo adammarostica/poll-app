@@ -61,10 +61,10 @@ export default function CreatePoll() {
           
           {
             pollOptions.map((option, index) => (
-              <>
+              <div className="poll-option" key={index}>
                 <label className="sr-only" htmlFor={index}>Enter an answer here</label>
-                <input onChange={handleOptionChange} value={option} type="text" name={index} id={index} placeholder="Another answer" />
-              </>
+                <input onChange={handleOptionChange} value={option} name={index} id={index} type="text" placeholder="Another answer" />
+              </div>
             ))
           }
 
