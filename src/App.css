@@ -13,9 +13,22 @@ h1, p {
   margin: 0;
 }
 
+h1 {
+  text-align: center;
+}
+
 a {
   text-decoration: none;
   color: black;
+}
+
+textarea {
+  resize: none;
+}
+
+[type=text] {
+  border: 1px solid black;
+  width: 80%;
 }
 
 button {
@@ -40,29 +53,16 @@ button {
   padding: 1rem;
 }
 
-.poll-options {
+.create {
+  border: 1px solid black;
+  width: 100%;
   display: flex;
   flex-direction: column;
   align-items: center;
 }
 
-.poll-option {
+.poll-options {
   display: flex;
-}
-
-.poll-option p {
-  width: 100%;
-}
-
-.poll-option__button {
-  border: none;
-  color: white;
-}
-
-.poll-option__button--add {
-  background-color: green;
-}
-
-.poll-option__button--remove {
-  background-color: red;
+  flex-direction: column;
+  align-items: center;
 }
