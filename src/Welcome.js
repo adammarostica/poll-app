@@ -1,12 +1,19 @@
-import { Link } from 'react-router-dom';
+import { Link, useNavigate } from 'react-router-dom';
 import { useState } from 'react';
 
 export default function Welcome() {
   
   const [userInput, setUserInput] = useState('');
+  const navigate = useNavigate();
 
   function handleChange(e) {
     setUserInput(e.target.value)
+  }
+  
+  function handleClick(e) {
+    if (userInput) {
+      navigate(`poll/${userInput}`);
+    }
   }
 
   return (
@@ -18,7 +25,7 @@ export default function Welcome() {
       <p>- or -</p>
       <label htmlFor="pollId">Enter a poll code</label>
       <input onChange={handleChange} type="text" name="pollId" id="pollId" value={userInput}></input>
-      <button>
+      <button onClick={handleClick}>
         Join a Poll
       </button>
     </section>

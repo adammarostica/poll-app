@@ -52,7 +52,7 @@ export default function CreatePoll() {
 
       <form action="" onSubmit={handleSubmit}>
         <label className="sr-only" htmlFor="poll-question">What would you like to ask?</label>
-        <textarea onChange={handleQuestionChange} value={pollQuestion} name="poll-question" id="poll-question" cols="30" rows="2" required></textarea>
+        <textarea onChange={handleQuestionChange} value={pollQuestion} name="poll-question" id="poll-question" cols="30" rows="2" placeholder="What question would you like to ask?" required></textarea>
 
         <fieldset className="poll-options">
           <legend>Which answers would you like to offer?</legend>
