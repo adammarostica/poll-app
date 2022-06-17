@@ -37,8 +37,12 @@ export default function CreatePoll() {
         poll.options[option] = 0;
       }
     })
-    push(dbRef, poll)
-      .then((response) => navigate(`../poll/${response.key}`));
+    if (poll.question && Object.entries(poll.options).length > 0) {
+      push(dbRef, poll)
+        .then((response) => navigate(`../poll/${response.key}`));
+    } else {
+      console.log('nope');
+    }
   }
 
   return (
@@ -48,7 +52,7 @@ export default function CreatePoll() {
 
       <form onSubmit={handleSubmit}>
         <label className="sr-only" htmlFor="poll-question">What would you like to ask?</label>
-        <textarea onChange={handleQuestionChange} value={pollQuestion} name="poll-question" id="poll-question" cols="30" rows="2"></textarea>
+        <textarea onChange={handleQuestionChange} value={pollQuestion} name="poll-question" id="poll-question" cols="30" rows="2" required></textarea>
 
         <fieldset className="poll-options">
           <legend>Which answers would you like to offer?</legend>
