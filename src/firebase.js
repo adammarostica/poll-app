@@ -5,12 +5,13 @@ import { initializeApp } from "firebase/app";
 
 // Your web app's Firebase configuration
 const firebaseConfig = {
-  apiKey: "AIzaSyC_fN-FEGWdaeIL9LBQ5MbBeJ-IxSLsnCw",
-  authDomain: "react-with-firebase-bookshelf.firebaseapp.com",
-  projectId: "react-with-firebase-bookshelf",
-  storageBucket: "react-with-firebase-bookshelf.appspot.com",
-  messagingSenderId: "196971775921",
-  appId: "1:196971775921:web:4cabb426ac2ff1ec32df90"
+  apiKey: "AIzaSyDaNPAdqRNDVFNViNCr0P35pQ4G5VebL3o",
+  authDomain: "what-are-we-doing-friends.firebaseapp.com",
+  databaseURL: "https://what-are-we-doing-friends-default-rtdb.firebaseio.com",
+  projectId: "what-are-we-doing-friends",
+  storageBucket: "what-are-we-doing-friends.appspot.com",
+  messagingSenderId: "325453100753",
+  appId: "1:325453100753:web:c07b3090da7b4f41f377f0"
 };
 
 // Initialize Firebase
