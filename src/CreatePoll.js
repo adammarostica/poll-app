@@ -50,7 +50,7 @@ export default function CreatePoll() {
 
       <h1>Let's Make a Poll!</h1>
 
-      <form onSubmit={handleSubmit}>
+      <form action="" onSubmit={handleSubmit}>
         <label className="sr-only" htmlFor="poll-question">What would you like to ask?</label>
         <textarea onChange={handleQuestionChange} value={pollQuestion} name="poll-question" id="poll-question" cols="30" rows="2" required></textarea>
 
