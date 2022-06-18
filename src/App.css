@@ -9,6 +9,14 @@ html {
   font-size: 125%;
 }
 
+body {
+  font-family: 'Bokor', cursive;
+  font-family: 'Fredericka the Great', cursive;
+  font-family: 'Henny Penny', cursive;
+  font-family: 'Finger Paint', cursive;
+  background: url(./wickedbackground.svg) no-repeat center / cover;
+}
+
 h1, p {
   margin: 0;
 }
