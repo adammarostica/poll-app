@@ -41,7 +41,7 @@ export default function Results({code}) {
   }, [pollResults])
 
   return (
-    <div className="poll">
+    <div className="results">
       <h1>Results</h1>
       <h2>{pollQuestion}</h2>
       {
@@ -55,6 +55,7 @@ export default function Results({code}) {
             <div className="results__list__percentage results__list__percentage--25">25%</div>
             <div className="results__list__percentage results__list__percentage--50">50%</div>
             <div className="results__list__percentage results__list__percentage--75">75%</div>
+            <div className="results__background"></div>
           </ul>
           : <LoadingBlob />
       }
