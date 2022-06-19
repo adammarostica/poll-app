@@ -1,7 +1,9 @@
+import './Voting.css';
 import {useState, useEffect} from 'react';
 import firebase from './firebase';
 import {getDatabase, ref, update, get, increment} from 'firebase/database';
 import uuid from 'react-uuid';
+import Heading from './Heading';
 
 export default function Voting({code, userHasVoted, setUserHasVoted}) {
 
@@ -51,20 +53,15 @@ export default function Voting({code, userHasVoted, setUserHasVoted}) {
 
   return(
     <div className="poll">
-      <h1>
-        {
-          pollQuestion
-            ? pollQuestion
-            : `Loading...`
-        }
-      </h1>
+      <Heading text={pollQuestion ? pollQuestion : 'Loading...'} />
       
       
       <form onSubmit={handleSubmit}>
         {
           choices.map((choice) => (
-            <div key={uuid()} className="poll-choice">
+            <div key={uuid()} className="poll__choice">
               <input
+                className='sr-only'
                 onChange={handleChange}
                 type="radio"
                 id={choice}
@@ -72,14 +69,14 @@ export default function Voting({code, userHasVoted, setUserHasVoted}) {
                 value={choice}
                 checked={userChoice === choice}  
               />
-              <label htmlFor={choice}>{choice}</label>
+              <label tabindex="0" className="poll__choice__label" htmlFor={choice}>{choice}</label>
             </div>
           ))
         }
         {
           userChoice
-            ? <button type="submit">Vote</button>
-            : null
+            ? <button className="poll__button" type="submit">Vote</button>
+            : <button className="poll__button poll__button--hidden" type="submit">Vote</button>
         }
       </form>
 

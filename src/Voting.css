@@ -1,0 +1,60 @@
+.poll {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+
+.poll__choice {
+  width: 100%;
+}
+
+.poll__choice__label {
+  margin-bottom: 1rem;
+  padding: .5rem;
+  display: block;
+  border: none;
+  font-family: 'Fredericka the Great', sans-serif;
+  font-size: 1.5rem;
+  text-align: center;
+  padding: 1rem 1.5rem;
+  border-radius: 100vmax;
+  background-color: hsl(0, 0%, 24%);
+  box-shadow: .2rem .2rem .3rem rgba(12, 12, 12),
+  inset -.2rem -.2rem .3rem hsl(0, 0%, 10%),
+  inset .2rem .2rem .3rem hsl(0, 0%, 80%);
+  transition: background-color .3s ease-out, box-shadow .3s ease-out, transform .3s ease-out;
+  cursor: pointer;
+  color: white;
+}
+
+.poll__choice__label:hover {
+  background-color: hsl(0, 0%, 24%);
+  box-shadow: .2rem .2rem .3rem rgba(12, 12, 12),
+              inset -.2rem -.2rem .3rem hsl(0, 0%, 10%),
+              inset .2rem .2rem .3rem hsl(0, 0%, 80%);
+  transform: scale(1.05);
+}
+
+.poll__choice__label:focus {
+  box-shadow: .2rem .2rem .4rem rgba(12, 12, 12),
+              inset -.2rem -.2rem .3rem hsl(0, 0%, 10%),
+              inset .2rem .2rem .3rem hsl(0, 0%, 80%),
+              inset -.2rem -.2rem .3rem hsl(283, 100%, 10%),
+              inset .2rem .2rem .3rem hsl(283, 100%, 80%);
+}
+
+[type="radio"]:checked ~ .poll__choice__label {
+  box-shadow: inset .4rem .4rem .8rem hsl(0, 0%, 0%);
+}
+
+.poll__button {
+  margin-top: 3rem;
+  width: 70%;
+  transition: opacity .3s ease-out, transform .3s ease-out;
+}
+
+.poll__button--hidden {
+  opacity: 0;
+  cursor: initial;
+  transform: translateY(2rem);
+}

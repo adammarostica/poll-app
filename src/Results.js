@@ -1,6 +1,7 @@
 import './Results.css'
-import {ReactComponent as LoadingBlob} from './blocks-wave.svg'
 import Result from './Result';
+import Heading from './Heading';
+import {ReactComponent as LoadingBlob} from './blocks-wave.svg'
 import {useState, useEffect} from 'react';
 import firebase from './firebase';
 import {getDatabase, ref, onValue} from 'firebase/database';
@@ -42,7 +43,7 @@ export default function Results({code}) {
 
   return (
     <div className="results">
-      <h1>Results</h1>
+      <Heading text="Results" />
       <h2>{pollQuestion}</h2>
       {
         pollResults.length > 0 ?
@@ -55,7 +56,7 @@ export default function Results({code}) {
             <div className="results__list__percentage results__list__percentage--25">25%</div>
             <div className="results__list__percentage results__list__percentage--50">50%</div>
             <div className="results__list__percentage results__list__percentage--75">75%</div>
-            <div className="results__background"></div>
+            <div className="results__list__background"></div>
           </ul>
           : <LoadingBlob />
       }

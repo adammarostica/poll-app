@@ -10,11 +10,9 @@ html {
 }
 
 body {
-  font-family: 'Bokor', cursive;
-  font-family: 'Fredericka the Great', cursive;
-  font-family: 'Henny Penny', cursive;
-  font-family: 'Finger Paint', cursive;
-  background: url(./wickedbackground.svg) no-repeat center / cover;
+  font-family: 'Rancho', cursive;
+  background: url(./wickedbackground.svg) no-repeat center / cover fixed;
+  background-color: #DFDBE5;
 }
 
 h1, p {
@@ -23,24 +21,55 @@ h1, p {
 
 h1 {
   text-align: center;
+  font-size: clamp(1.5rem, 7vw, 3rem);
+  box-shadow: 0 0 0.05em 1em rgba(61, 61, 61, 0.1),
+              0 0 0.05em .8em rgba(61, 61, 61, 0.25),
+              0 0 0.05em .6em rgba(61, 61, 61, 0.4),
+              0 0 0.05em .4em rgba(61, 61, 61, 0.65),
+              0 0 0.05em .2em rgba(61, 61, 61, .8);
+  background-color: rgba(61, 61, 61, .97);
+  color: #eee;
+  padding: .5rem;
+  border-radius: 0rem;
+}
+
+p {
+  font-size: 2rem;
 }
 
 a {
   text-decoration: none;
-  color: black;
+  color: white;
+}
+
+form {
+  width: 60%;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
 }
 
 textarea {
+  font-family: 'Rancho', cursive;
+  border: 1px solid black;
+  width: 90%;
+  margin: 1rem 0;
+  padding: .5rem .75rem;
+  border-radius: 10px;
+  font-size: 1.5rem;
+  box-shadow: inset .1rem .1rem .2rem rgba(61, 61, 61, .97);;
   resize: none;
 }
 
 [type=text] {
+  font-family: 'Rancho', cursive;
   border: 1px solid black;
-  width: 80%;
-}
-
-button {
-  display: block;
+  width: 70%;
+  margin: 1rem 0;
+  padding: .5rem .75rem;
+  border-radius: 10px;
+  font-size: 1.5rem;
+  box-shadow: inset .1rem .1rem .2rem rgba(61, 61, 61, .97);;
 }
 
 ul {
@@ -49,34 +78,104 @@ ul {
   padding: 0;
 }
 
+button {
+  margin-bottom: 1rem;
+  padding: .5rem;
+  display: block;
+  border: none;
+  font-family: 'Fredericka the Great', sans-serif;
+  font-size: 1.5rem;
+  background-color: hsl(283, 100%, 25%);
+  padding: 1rem 1.5rem;
+  border-radius: 100vmax;
+  box-shadow: .2rem .2rem .3rem rgba(12, 12, 12),
+              inset -.2rem -.2rem .3rem hsl(283, 100%, 10%),
+              inset .2rem .2rem .3rem hsl(283, 100%, 80%);
+  transition: background-color .3s ease-out, box-shadow .3s ease-out, transform .3s ease-out;
+  cursor: pointer;
+  color: white;
+}
+
+button:hover {
+  background-color: hsl(283, 100%, 30%);
+  box-shadow: .4rem .3rem .8rem rgba(12, 12, 12),
+              inset -.2rem -.2rem .3rem hsl(283, 100%, 10%),
+              inset .2rem .2rem .3rem hsl(283, 100%, 80%);
+  transform: scale(1.05);
+}
+
+button:focus {
+  box-shadow: 0 0 0 .25rem hsl(283, 100%, 95%),
+              0 0 0 .5rem hsl(283, 100%, 30%),
+              inset -.2rem -.2rem .3rem hsl(283, 100%, 10%),
+              inset .2rem .2rem .3rem hsl(283, 100%, 80%);
+}
+
+button:active {
+  transform: scale(1);
+  box-shadow: .2rem .2rem .3rem rgba(12, 12, 12),
+              inset -.2rem -.2rem .3rem hsl(283, 100%, 10%),
+              inset .2rem .2rem .3rem hsl(283, 100%, 80%);
+}
+
+.heading {
+  display: flex;
+  justify-content: center;
+  margin-bottom: 10vmin;
+  font-family: 'Fredericka the Great', cursive;
+}
+
 .app {
   width: 80%;
   margin: 0 auto;
   height: 100vh;
   display: flex;
+  flex-direction: column;
   justify-content: center;
   align-items: center;
 }
 
 .welcome {
-  border: 1px solid black;
   display: flex;
   flex-direction: column;
   justify-content: center;
   align-items: center;
-  padding: 1rem;
 }
 
 .create {
-  border: 1px solid black;
+  /* border: 1px solid black; */
   width: 100%;
   display: flex;
   flex-direction: column;
   align-items: center;
 }
 
-.poll-options {
+.create__form {
   display: flex;
   flex-direction: column;
   align-items: center;
+}
+
+.create__button {
+  margin-top: 1rem;
+}
+
+.poll-options {
+  font-size: 1.5rem;
+  width: 100%;
+}
+
+.poll-option {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  width: 100%;
+  margin: 0 auto;
+  align-self: center
+}
+
+.poll-option__input {
+  width: 80%;
+  margin: .5rem;
 }

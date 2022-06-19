@@ -2,7 +2,7 @@ export default function Result({resultValues, numTotalVotes, index}) {
 
   const [resultTitle, resultVotes] = resultValues;
   const style = {
-    width: `${Math.max(resultVotes / numTotalVotes * 100, 0)}%`,
+    width: `${Math.max(resultVotes / numTotalVotes * 100, 1)}%`,
     // backgroundColor: 'red',
   }
   const shadowStyle = {
@@ -17,10 +17,10 @@ export default function Result({resultValues, numTotalVotes, index}) {
     <li className="result">
       <p className="result__title">{resultTitle}</p>
       <div style={style} className="result__bar" aria-hidden="true">
-        <p className="result__title result__title-light">{resultTitle}</p>
+        <p className="result__title result__title--light">{resultTitle}</p>
       </div>
       {
-        resultVotes > 0
+        resultVotes >= 0
           ? <div style={shadowStyle} className="result__bar__shadow" aria-hidden="true"></div>
           : null
         }

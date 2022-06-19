@@ -2,6 +2,7 @@ import { useEffect, useState } from "react";
 import firebase from "./firebase";
 import {getDatabase, ref, push} from "firebase/database";
 import { useNavigate } from "react-router-dom";
+import Heading from "./Heading";
 
 export default function CreatePoll() {
   
@@ -48,9 +49,9 @@ export default function CreatePoll() {
   return (
     <div className="create">
 
-      <h1>Let's Make a Poll!</h1>
+      <Heading text="Let's Make a Poll!" />
 
-      <form action="" onSubmit={handleSubmit}>
+      <form className="create__form" action="" onSubmit={handleSubmit}>
         <label className="sr-only" htmlFor="poll-question">What would you like to ask?</label>
         <textarea onChange={handleQuestionChange} value={pollQuestion} name="poll-question" id="poll-question" cols="30" rows="2" placeholder="What question would you like to ask?" required></textarea>
 
@@ -61,13 +62,13 @@ export default function CreatePoll() {
             pollOptions.map((option, index) => (
               <div className="poll-option" key={index}>
                 <label className="sr-only" htmlFor={index}>Enter an answer here</label>
-                <input onChange={handleOptionChange} value={option} name={index} id={index} type="text" placeholder="Another answer" />
+                <input className="poll-option__input" onChange={handleOptionChange} value={option} name={index} id={index} type="text" placeholder="Another answer" />
               </div>
             ))
           }
 
         </fieldset>
-        <button type="submit">Create Poll</button>
+        <button className="create__button" type="submit">Create Poll</button>
       </form>
     </div>
   );
