@@ -1,11 +1,15 @@
 .poll {
+  width: 80%;
+  margin: 0 auto;
   display: flex;
   flex-direction: column;
   align-items: center;
+  justify-content: center;
 }
 
 .poll__choice {
   width: 100%;
+  max-width: 600px;
 }
 
 .poll__choice__label {
@@ -50,6 +54,7 @@
 .poll__button {
   margin-top: 3rem;
   width: 70%;
+  max-width: 500px;
   transition: opacity .3s ease-out, transform .3s ease-out;
 }
 

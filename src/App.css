@@ -4,6 +4,11 @@ html{line-height:1.15;-ms-text-size-adjust:100%;-webkit-text-size-adjust:100%}bo
 
 .sr-only { position: absolute; width: 1px; height: 1px; margin: -1px; border: 0; padding: 0; white-space: nowrap; clip-path: inset(100%); clip: rect(0 0 0 0); overflow: hidden;}
 
+html, body {
+  width: 100%;
+  height: 100%;
+}
+
 html {
   text-rendering: optimizeLegibility;
   font-size: 125%;
@@ -15,22 +20,29 @@ body {
   background-color: #DFDBE5;
 }
 
-h1, p {
+h1, h2, h3, p {
   margin: 0;
 }
 
 h1 {
-  text-align: center;
-  font-size: clamp(1.5rem, 7vw, 3rem);
-  box-shadow: 0 0 0.05em 1em rgba(61, 61, 61, 0.1),
-              0 0 0.05em .8em rgba(61, 61, 61, 0.25),
-              0 0 0.05em .6em rgba(61, 61, 61, 0.4),
-              0 0 0.05em .4em rgba(61, 61, 61, 0.65),
-              0 0 0.05em .2em rgba(61, 61, 61, .8);
-  background-color: rgba(61, 61, 61, .97);
+  text-align: left;
+  font-size: clamp(2.5rem, 7vw, 4rem);
   color: #eee;
   padding: .5rem;
   border-radius: 0rem;
+  display: block;
+  width: fit-content;
+}
+
+h2 {
+  font-size: clamp(2rem, 7vw, 4rem);
+  margin-bottom: 1rem;
+  text-align: center;
+}
+
+h3 {
+  font-size: clamp(1.5rem, 5vw, 2rem);
+  margin: 1rem;
 }
 
 p {
@@ -43,32 +55,33 @@ a {
 }
 
 form {
-  width: 60%;
+  width: 100%;
   display: flex;
   flex-direction: column;
   align-items: center;
+  justify-content: center;
 }
 
 textarea {
-  font-family: 'Rancho', cursive;
+  font-family: 'Anek Latin', sans-serif;
   border: 1px solid black;
-  width: 90%;
+  width: 100%;
   margin: 1rem 0;
   padding: .5rem .75rem;
   border-radius: 10px;
-  font-size: 1.5rem;
-  box-shadow: inset .1rem .1rem .2rem rgba(61, 61, 61, .97);;
+  /* font-size: 1.5rem; */
+  box-shadow: inset .1rem .1rem .2rem rgba(61, 61, 61, .97);
   resize: none;
 }
 
 [type=text] {
-  font-family: 'Rancho', cursive;
+  font-family: 'Anek Latin', sans-serif;
   border: 1px solid black;
-  width: 70%;
+  width: 15rem;
   margin: 1rem 0;
   padding: .5rem .75rem;
   border-radius: 10px;
-  font-size: 1.5rem;
+  font-size: 1rem;
   box-shadow: inset .1rem .1rem .2rem rgba(61, 61, 61, .97);;
 }
 
@@ -81,9 +94,10 @@ ul {
 button {
   margin-bottom: 1rem;
   padding: .5rem;
+  width: 12rem;
   display: block;
   border: none;
-  font-family: 'Fredericka the Great', sans-serif;
+  font-family: 'Rancho', sans-serif;
   font-size: 1.5rem;
   background-color: hsl(283, 100%, 25%);
   padding: 1rem 1.5rem;
@@ -118,17 +132,42 @@ button:active {
               inset .2rem .2rem .3rem hsl(283, 100%, 80%);
 }
 
-.heading {
+header {
+  width: 100%;
   display: flex;
+  padding-inline: 1.5rem;
+  justify-content: space-between;
+  align-items: center;
+  background-color: hsl(283, 100%, 20%);
+  box-shadow: 0 0 .3rem .3rem rgba(12, 12, 12),
+              inset -.2rem -.2rem .3rem hsl(283, 100%, 10%),
+              inset .1rem .1rem .2rem hsl(283, 100%, 80%);
+}
+
+header p {
+  font-size: 1rem;
+  font-family: 'Anek Latin';
+}
+
+main {
+  width: 100%;
+  height: 100%;
+  flex: 1 0 auto;
+  display: flex;
+  flex-direction: column;
   justify-content: center;
-  margin-bottom: 10vmin;
-  font-family: 'Fredericka the Great', cursive;
+}
+
+footer {
+  padding: 1rem;
+  text-align: center;
+  width: 100%;
 }
 
 .app {
-  width: 80%;
+  width: 100%;
   margin: 0 auto;
-  height: 100vh;
+  min-height: 100vh;
   display: flex;
   flex-direction: column;
   justify-content: center;
@@ -143,10 +182,14 @@ button:active {
 }
 
 .create {
-  /* border: 1px solid black; */
-  width: 100%;
+  width: 80%;
+  max-width: 600px;
+  margin: 0 auto;
+  height: 100%;
   display: flex;
+  flex: 1 0 auto;
   flex-direction: column;
+  justify-content: center;
   align-items: center;
 }
 
@@ -178,4 +221,13 @@ button:active {
 .poll-option__input {
   width: 80%;
   margin: .5rem;
+}
+
+@media (max-width: 480px) {
+  header {
+    justify-content: center;
+  }
+  header p {
+    display: none;
+  }
 }

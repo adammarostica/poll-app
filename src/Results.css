@@ -1,10 +1,8 @@
 .results {
-  width: 100%;
-}
-
-.results h2 {
+  width: 80%;
+  margin: 0 auto;
+  max-width: 800px;
   text-align: center;
-  font-size: clamp(1rem, 5vw, 2rem);
 }
 
 .results__list__background {
@@ -59,17 +57,6 @@
   font-family: 'Fredericka the Great', cursive;
 }
 
-/* .results__list__percentage::before {
-  content: '';
-  position: absolute;
-  width: 1px;
-  height: 105%;
-  background-color: black;
-  top: -80%;
-  left: 50%;
-  transform: rotate(60deg);
-} */
-
 .results__list__percentage--25 {
   left: 25%;
 }
@@ -86,7 +73,7 @@
   position: relative;
   display: flex;
   align-items: center;
-  margin: 1.5rem 0;
+  margin: 2rem 0;
   height: 3rem;
   width: 100%;
   border-top-right-radius: 5px;

@@ -3,7 +3,6 @@ import {useState, useEffect} from 'react';
 import firebase from './firebase';
 import {getDatabase, ref, update, get, increment} from 'firebase/database';
 import uuid from 'react-uuid';
-import Heading from './Heading';
 
 export default function Voting({code, userHasVoted, setUserHasVoted}) {
 
@@ -18,7 +17,10 @@ export default function Voting({code, userHasVoted, setUserHasVoted}) {
     get(dbRef).then((snapshot) => {
       if (snapshot.exists()) {
         const data = snapshot.val()
-        const newQuestion = data.question;
+        let newQuestion = data.question;
+        if (newQuestion[newQuestion.length -1] !== '?') {
+          newQuestion += '?';
+        }
         setPollQuestion(newQuestion);
         const newChoices = [];
         for (let item in data.options) {
@@ -53,7 +55,7 @@ export default function Voting({code, userHasVoted, setUserHasVoted}) {
 
   return(
     <div className="poll">
-      <Heading text={pollQuestion ? pollQuestion : 'Loading...'} />
+      <h2>{pollQuestion ? pollQuestion : 'Loading...'}</h2>
       
       
       <form onSubmit={handleSubmit}>
@@ -69,7 +71,7 @@ export default function Voting({code, userHasVoted, setUserHasVoted}) {
                 value={choice}
                 checked={userChoice === choice}  
               />
-              <label tabindex="0" className="poll__choice__label" htmlFor={choice}>{choice}</label>
+              <label tabIndex="0" className="poll__choice__label" htmlFor={choice}>{choice}</label>
             </div>
           ))
         }

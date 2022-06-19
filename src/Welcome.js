@@ -1,4 +1,3 @@
-import Heading from './Heading';
 import { Link, useNavigate } from 'react-router-dom';
 import { useState } from 'react';
 
@@ -15,24 +14,26 @@ export default function Welcome() {
     navigate('/create');
   }
   
-  function handleJoin() {
-    if (userInput) {
+  function handleJoin(e) {
+    e.preventDefault();
+    if (userInput.length > 0) {
       navigate(`poll/${userInput}`);
     }
   }
 
   return (
     <section className="welcome">
-      <Heading text="Poll in the Wall" />
       <button onClick={handleCreate}>
-        <Link role="button" className="link-button" to="/create">Create a Poll</Link>
+        <Link className="link-button" to="/create">Create a Poll</Link>
       </button>
       <p>or</p>
-      <label className="sr-only" htmlFor="pollId">Enter a poll code</label>
-      <input className="welcome__pollId" onChange={handleChange} type="text" name="pollId" id="pollId" value={userInput} placeholder="Enter a poll code and..."></input>
-      <button onClick={handleJoin}>
-        <Link role="button" className="link-button" to={`/poll/${userInput}`}>Join a Poll</Link>
-      </button>
+      <form action="" onSubmit={handleJoin}>
+        <label className="sr-only" htmlFor="pollId">Enter a poll code</label>
+        <input className="welcome__pollId" onChange={handleChange} type="text" name="pollId" id="pollId" value={userInput} placeholder="Enter a poll code and..." required></input>
+        <button>
+          Join a Poll
+        </button>
+      </form>
     </section>
   ); 
 }

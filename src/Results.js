@@ -1,6 +1,5 @@
 import './Results.css'
 import Result from './Result';
-import Heading from './Heading';
 import {ReactComponent as LoadingBlob} from './blocks-wave.svg'
 import {useState, useEffect} from 'react';
 import firebase from './firebase';
@@ -43,8 +42,13 @@ export default function Results({code}) {
 
   return (
     <div className="results">
-      <Heading text="Results" />
-      <h2>{pollQuestion}</h2>
+      <h2>Results</h2>
+      <p>{
+        numTotalVotes === 1
+         ? `${numTotalVotes} vote`
+         : `${numTotalVotes} votes` 
+      }</p>
+      <h3>{pollQuestion}</h3>
       {
         pollResults.length > 0 ?
           <ul className="results__list">
