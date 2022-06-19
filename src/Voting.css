@@ -48,7 +48,8 @@
 }
 
 [type="radio"]:checked ~ .poll__choice__label {
-  box-shadow: inset .4rem .4rem .8rem hsl(0, 0%, 0%);
+  box-shadow: inset .6rem .6rem 1.6rem hsl(0, 0%, 0%),
+              inset -.2rem -.2rem .6rem hsl(0, 0%, 80%);
 }
 
 .poll__button {
