@@ -27,14 +27,24 @@ export default function CreatePoll() {
     setPollOptions(newOptions);
   }
 
+  function handleEnter(e) {
+    if (e.key === 'Enter') {
+      const form = e.target.form;
+      const index = [...form].indexOf(e.target);
+      form.elements[index + 1].focus();
+      e.preventDefault();
+    }
+  }
+
   function handleSubmit(e) {
     e.preventDefault();
     const database = getDatabase(firebase);
     const dbRef = ref(database);
-    const poll = {question: pollQuestion, options: {}};
+    const poll = {question: pollQuestion, options: {}, order: []};
     pollOptions.forEach((option) => {
       if (option) {
         poll.options[option] = 0;
+        poll.order.push(option);
       }
     })
     if (poll.question && Object.entries(poll.options).length > 0) {
@@ -62,6 +72,7 @@ export default function CreatePoll() {
                 <input
                   className="poll-option__input"
                   onChange={handleOptionChange}
+                  onKeyDown={handleEnter}
                   value={option}
                   name={index}
                   id={index}

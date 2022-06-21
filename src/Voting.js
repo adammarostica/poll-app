@@ -23,9 +23,9 @@ export default function Voting({code, userHasVoted, setUserHasVoted}) {
         }
         setPollQuestion(newQuestion);
         const newChoices = [];
-        for (let item in data.options) {
+        data.order.forEach(item => {
           newChoices.push(item);
-        }
+        });
         setChoices(newChoices);
       } else {
         setPollQuestion(`We couldn't find your poll.`)

@@ -12,7 +12,7 @@ export default function Results({code}) {
   const [pollQuestion, setPollQuestion] = useState(``);
   const [pollResults, setPollResults] = useState([]);
   const [numTotalVotes, setNumTotalVotes] = useState(0);
-  console.log(numTotalVotes);
+  
   useEffect(function getResults() {
     const database = getDatabase(firebase);
     const dbRef = ref(database, code);
@@ -40,20 +40,39 @@ export default function Results({code}) {
     }, 0));
   }, [pollResults])
 
+  async function handleShare() {
+    const shareData = {
+      title: 'Poll in the Wall',
+      text: pollQuestion,
+      url: window.location.href
+    };
+    console.log(shareData);
+    if (navigator.share) {
+      try {
+        await navigator
+          .share(shareData)
+          .then(() =>
+            console.log("Hooray! Your content was shared to tha world")
+          );
+      } catch (error) {
+        console.log(`Oops! I couldn't share to the world because: ${error}`);
+      }
+    } else {
+      // fallback code
+      console.log(
+        "Web share is currently not supported on this browser. Please provide a callback"
+      );
+    }
+  }
+
   return (
     <div className="results">
-      <h2>Results</h2>
-      <p>{
-        numTotalVotes === 1
-         ? `${numTotalVotes} vote`
-         : `${numTotalVotes} votes` 
-      }</p>
-      <h3>{pollQuestion}</h3>
+      <h2>{pollQuestion}</h2>
       {
         pollResults.length > 0 ?
-          <ul className="results__list">
+          <section className="results__list">
             {
-              pollResults.map((result, index) => (
+              pollResults.map((result) => (
                 <Result key={uuid()} resultValues={result} numTotalVotes={numTotalVotes} />
               ))
             }
@@ -61,8 +80,16 @@ export default function Results({code}) {
             <div className="results__list__percentage results__list__percentage--50">50%</div>
             <div className="results__list__percentage results__list__percentage--75">75%</div>
             <div className="results__list__background"></div>
-          </ul>
+            <div className="results__list__vote-count">
+            {numTotalVotes === 1
+              ? `${numTotalVotes} vote`
+              : `${numTotalVotes} votes`}
+            </div>
+          </section>
           : <LoadingBlob />
+      }
+      {
+        navigator.share && <button onClick={handleShare}>Share</button>
       }
     </div>
   );

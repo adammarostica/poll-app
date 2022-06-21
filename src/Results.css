@@ -1,18 +1,9 @@
 .results {
+  position: relative;
   width: 80%;
   margin: 0 auto;
   max-width: 800px;
   text-align: center;
-}
-
-.results__list__background {
-  position: absolute;
-  bottom: 1rem;
-  left: .8rem;
-  width: 100%;
-  height: 100%;
-  background-color: hsla(0, 0%, 20%);
-  z-index: -10;
 }
 
 .results__list {
@@ -45,15 +36,14 @@
   background-color: hsl(0, 0%, 40%);;
   position: absolute;
   z-index: -1;
-  /* opacity: .8; */
 }
 
 .results__list__percentage {
   color: white;
-  font-size: 1.2rem;
+  font-size: 1.1rem;
   position: absolute;
-  bottom: .5rem;
-  transform: translateX(-50%) skewY(-33deg);
+  bottom: .3rem;
+  transform: translateX(-50%) skewX(15deg) skewY(-25deg);
   font-family: 'Fredericka the Great', cursive;
 }
 
@@ -67,6 +57,26 @@
 
 .results__list__percentage--75 {
   left: 75%;
+}
+
+.results__list__vote-count {
+  position: absolute;
+  top: .3rem;
+  right: .5rem;
+  content: '16 votes';
+  color: white;
+  text-shadow: -1px 1px hsl(0, 0%, 10%);
+  background-color: hsl(0, 0%, 20%);
+}
+
+.results__list__background {
+  position: absolute;
+  bottom: 1rem;
+  left: .8rem;
+  width: 100%;
+  height: 100%;
+  background-color: hsl(0, 0%, 20%);
+  z-index: -10;
 }
 
 .result {
@@ -101,7 +111,33 @@
   height: 100%;
   animation: 1s grow linear forwards;
   white-space: nowrap;
-  overflow-x: hidden;
+}
+
+.result__bar__flag {
+  content: attr(votes);
+  position: absolute;
+  display: grid;
+  top: -1rem;
+  left: calc(100% + .7rem);
+  align-items: center;
+  padding: 0 1rem 0 .5rem;
+  background: rgb(243, 46, 46);
+  width: fit-content;
+  height: 1.5rem;
+  color: white;
+  z-index: -1;
+}
+
+.result__bar__flag::after {
+  content: '';
+  position: absolute;
+  top: .3rem;
+  left: 85%;
+  width: 1.5rem;
+  height: 1.5rem;
+  background-color: hsla(0, 0%, 20%);
+  transform: rotate(-67deg) skewX(-45deg);
+  z-index: -1;
 }
 
 .result__bar__shadow {
@@ -123,7 +159,6 @@
   height: 1.3rem;
   background: linear-gradient(51deg, hsl(283, 100%, 40%) 0 47%, transparent 47% 100%);
   transform: rotate(39deg);
-  /* z-index: -10; */
 }
 
 .result__bar__shadow::after {
