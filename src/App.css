@@ -134,7 +134,7 @@ button {
 
 button:hover {
   background-color: hsl(283, 100%, 30%);
-  box-shadow: .4rem .4rem .8rem rgba(12, 12, 12),
+  box-shadow: .3rem .3rem .4rem rgba(12, 12, 12),
               inset -.4rem -.4rem .6rem hsl(283, 100%, 10%),
               inset .4rem .4rem .6rem hsl(283, 100%, 80%);
 }
@@ -226,6 +226,26 @@ footer {
 
 .create__button {
   margin-top: 1rem;
+}
+
+.create__slug {
+  display: flex;
+  align-items: center;
+}
+
+.create__slug__address {
+  font-size: 1rem;
+}
+.create__slug__input {
+  width: 6rem;
+  height: 2rem;
+  padding: .5rem;
+  font-size: 1rem;
+  margin-left: 1rem;
+}
+
+.create__slug__input--taken {
+  border: 1px solid red;
 }
 
 .poll-options {

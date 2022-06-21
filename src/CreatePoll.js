@@ -1,12 +1,15 @@
 import { useEffect, useState } from "react";
-import firebase from "./firebase";
-import {getDatabase, ref, push} from "firebase/database";
+import useDebounce from "./useDebounce";
 import { useNavigate } from "react-router-dom";
+import firebase from "./firebase";
+import { getDatabase, ref, push, get, set } from "firebase/database";
 
 export default function CreatePoll() {
   
   const [pollQuestion, setPollQuestion] = useState('');
   const [pollOptions, setPollOptions] = useState([]);
+  const [slug, setSlug] = useState('');
+  const debouncedSlug = useDebounce(pollQuestion, 500);
   const navigate = useNavigate();
 
   useEffect(() => {
@@ -16,6 +19,23 @@ export default function CreatePoll() {
       setPollOptions(newOptions);
     }
   }, [pollOptions])
+
+  useEffect(() => {
+    
+    console.log(debouncedSlug);
+    if (debouncedSlug) {
+      const slugKebab = debouncedSlug.match(/[A-Za-z0-9]+/gi).join('-').slice(0, 24);
+      const database = getDatabase(firebase);
+      const dbRef = ref(database, `/${slugKebab}`);
+      get(dbRef).then((snapshot) => {
+        if (snapshot.exists()) {
+          setSlug('');
+        } else {
+          setSlug(slugKebab);
+        }
+      })
+    }
+  }, [debouncedSlug])
 
   function handleQuestionChange(e) {
     setPollQuestion(e.target.value);
@@ -39,7 +59,6 @@ export default function CreatePoll() {
   function handleSubmit(e) {
     e.preventDefault();
     const database = getDatabase(firebase);
-    const dbRef = ref(database);
     const poll = {question: pollQuestion, options: {}, order: []};
     pollOptions.forEach((option) => {
       if (option) {
@@ -47,9 +66,18 @@ export default function CreatePoll() {
         poll.order.push(option);
       }
     })
+    console.log(poll);
     if (poll.question && Object.entries(poll.options).length > 0) {
-      push(dbRef, poll)
-        .then((response) => navigate(`../poll/${response.key}`));
+      if (slug === '') {
+        const dbRef = ref(database);
+        push(dbRef, poll)
+          .then((response) => navigate(`../poll/${response.key}`));
+      } else {
+        const dbRef = ref(database, slug);
+        set(dbRef, poll)
+          .then(() => navigate(`../poll/${slug}`));
+      }
+      
     } else {
       console.log('nope');
     }
@@ -57,7 +85,7 @@ export default function CreatePoll() {
 
   return (
     <div className="create">
-      <h2>Poll Creation</h2>
+      <h2>Poll Creator</h2>
       <form className="create__form" action="" onSubmit={handleSubmit}>
         <label className="sr-only" htmlFor="poll-question">What's your question?</label>
         <textarea onChange={handleQuestionChange} value={pollQuestion} name="poll-question" id="poll-question" cols="30" rows="2" placeholder="What's your question?" required></textarea>

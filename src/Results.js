@@ -46,7 +46,6 @@ export default function Results({code}) {
       text: pollQuestion,
       url: window.location.href
     };
-    console.log(shareData);
     if (navigator.share) {
       try {
         await navigator
@@ -88,9 +87,11 @@ export default function Results({code}) {
           </section>
           : <LoadingBlob />
       }
-      {
-        navigator.share && <button onClick={handleShare}>Share</button>
-      }
+      <div className="results__share">
+        {
+          navigator.share && <button className="results__share__button" onClick={handleShare}>Share this poll <i class="fa-solid fa-share-nodes"></i></button>
+        }
+      </div>
     </div>
   );
 }
