@@ -29,34 +29,38 @@
   transition: background-color .3s ease-out, box-shadow .3s ease-out, transform .3s ease-out;
   cursor: pointer;
   color: white;
+  word-break: break-all;
 }
 
 .poll__choice__label:hover {
   background-color: hsl(0, 0%, 24%);
-  box-shadow: .2rem .2rem .3rem rgba(12, 12, 12),
-              inset -.2rem -.2rem .3rem hsl(0, 0%, 10%),
-              inset .2rem .2rem .3rem hsl(0, 0%, 80%);
-  transform: scale(1.05);
+  box-shadow: .3rem .3rem .4rem rgba(12, 12, 12),
+              inset -.4rem -.4rem .6rem hsl(0, 0%, 10%),
+              inset .4rem .4rem .6rem hsl(0, 0%, 80%);
 }
 
 .poll__choice__label:focus {
-  box-shadow: .2rem .2rem .4rem rgba(12, 12, 12),
+  box-shadow: 0 0 0 .25rem hsl(0, 0%, 95%),
+              0 0 0 .5rem hsl(0, 0%, 30%),
               inset -.2rem -.2rem .3rem hsl(0, 0%, 10%),
-              inset .2rem .2rem .3rem hsl(0, 0%, 80%),
-              inset -.2rem -.2rem .3rem hsl(283, 100%, 10%),
-              inset .2rem .2rem .3rem hsl(283, 100%, 80%);
+              inset .2rem .2rem .3rem hsl(0, 0%, 80%);
+              outline: none;
 }
 
+
 [type="radio"]:checked ~ .poll__choice__label {
-  box-shadow: inset .6rem .6rem 1.6rem hsl(0, 0%, 0%),
-              inset -.2rem -.2rem .6rem hsl(0, 0%, 80%);
+  box-shadow: .2rem .2rem .3rem rgba(12, 12, 12),
+              inset -.2rem -.2rem .3rem hsl(0, 0%, 10%),
+              inset .2rem .2rem .3rem hsl(0, 0%, 80%),
+              inset .4rem .4rem .6rem hsl(0, 0%, 10%),
+              inset -.4rem -.4rem .6rem hsl(0, 0%, 80%);
 }
 
 .poll__button {
   margin-top: 3rem;
   width: 70%;
   max-width: 500px;
-  transition: opacity .3s ease-out, transform .3s ease-out;
+  transition: opacity .3s ease-out, background-color .1s ease-out, box-shadow .1s ease-out, transform .1s ease-out;
 }
 
 .poll__button--hidden {

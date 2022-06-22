@@ -1,3 +1,4 @@
+import './CreatePoll.css'
 import { useEffect, useState } from "react";
 import useDebounce from "./useDebounce";
 import { useNavigate } from "react-router-dom";
@@ -12,6 +13,7 @@ export default function CreatePoll() {
   const debouncedSlug = useDebounce(pollQuestion, 500);
   const navigate = useNavigate();
 
+  // If each poll input has text, generate a new blank input
   useEffect(() => {
     if (pollOptions.every((option) => option.length > 0)) {
       const newOptions = [...pollOptions];
@@ -20,9 +22,10 @@ export default function CreatePoll() {
     }
   }, [pollOptions])
 
+  // When the user stops typing their question, check if a kebab-ified version of the question already exists as a Firebase property.
+  // If yes, the poll will be assigned a random code by Firebase. If no, prepare to set the poll with its custom code.
+  // i.e. 'What time should we meet?' checks to see if 'What-time-should-we-meet' is an unused code.
   useEffect(() => {
-    
-    console.log(debouncedSlug);
     if (debouncedSlug) {
       const slugKebab = debouncedSlug.match(/[A-Za-z0-9]+/gi).join('-').slice(0, 24);
       const database = getDatabase(firebase);
@@ -47,6 +50,7 @@ export default function CreatePoll() {
     setPollOptions(newOptions);
   }
 
+  // Prevent the enter key from submitting the form. Instead, make it focus on the next form element.
   function handleEnter(e) {
     if (e.key === 'Enter') {
       const form = e.target.form;
@@ -56,6 +60,7 @@ export default function CreatePoll() {
     }
   }
 
+  // Compile the question and answer into an object to be submitted to Firebase, then navigate the user to their created poll.
   function handleSubmit(e) {
     e.preventDefault();
     const database = getDatabase(firebase);
@@ -66,7 +71,6 @@ export default function CreatePoll() {
         poll.order.push(option);
       }
     })
-    console.log(poll);
     if (poll.question && Object.entries(poll.options).length > 0) {
       if (slug === '') {
         const dbRef = ref(database);

@@ -10,6 +10,8 @@ export default function Voting({code, userHasVoted, setUserHasVoted}) {
   const [choices, setChoices] = useState([]);
   const [userChoice, setUserChoice] = useState('');
 
+
+  // Generate the poll options
   useEffect(() => {
     const database = getDatabase(firebase);
     const dbRef = ref(database, code);
@@ -37,6 +39,7 @@ export default function Voting({code, userHasVoted, setUserHasVoted}) {
     setUserChoice(e.target.value);
   }
 
+  // Submit the user's vote and note that they have voted in both state and localStorage so that <DisplayPoll /> displays <Results /> instead.
   function handleSubmit(e) {
     e.preventDefault();
     if (userHasVoted) {

@@ -89,7 +89,7 @@ textarea {
   width: 100%;
   margin: 1rem 0;
   padding: .5rem .75rem;
-  border-radius: 10px;
+  border-radius: 15px;
   box-shadow: inset .1rem .1rem .2rem rgba(61, 61, 61, .97),
                     .1rem .1rem .1rem white;
   resize: none;
@@ -100,7 +100,7 @@ textarea {
   width: 15rem;
   margin: 1rem 0;
   padding: .5rem .75rem;
-  border-radius: 10px;
+  border-radius: 15px;
   font-size: 1rem;
   box-shadow: inset .1rem .1rem .2rem rgba(61, 61, 61, .97),
               .1rem .1rem .1rem white;
@@ -121,7 +121,7 @@ button {
   font-family: 'Rancho', sans-serif;
   font-size: 1.5rem;
   background-color: hsl(283, 100%, 25%);
-  padding: 1rem 1.5rem;
+  padding: .75rem 1.5rem;
   border-radius: 100vmax;
   box-shadow: .2rem .2rem .3rem rgba(12, 12, 12),
               inset -.2rem -.2rem .3rem hsl(283, 100%, 10%),
@@ -149,7 +149,6 @@ button:focus {
 button:active {
   transform: scale(1);
   background-color: hsl(283, 100%, 25%);
-
   box-shadow: .2rem .2rem .3rem rgba(12, 12, 12),
               inset -.2rem -.2rem .3rem hsl(283, 100%, 10%),
               inset .2rem .2rem .3rem hsl(283, 100%, 80%),
@@ -206,66 +205,14 @@ footer {
   align-items: center;
 }
 
-.create {
-  width: 80%;
-  max-width: 600px;
-  margin: 0 auto;
-  /* height: 100%; */
-  display: flex;
-  /* flex: 1 0 auto; */
-  flex-direction: column;
-  justify-content: center;
-  align-items: center;
+.welcome__pollId__input {
+  border-radius: 15px 15px 0 0;
+  width: 12rem;
+  margin-bottom: -2px;
 }
 
-.create__form {
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-}
-
-.create__button {
-  margin-top: 1rem;
-}
-
-.create__slug {
-  display: flex;
-  align-items: center;
-}
-
-.create__slug__address {
-  font-size: 1rem;
-}
-.create__slug__input {
-  width: 6rem;
-  height: 2rem;
-  padding: .5rem;
-  font-size: 1rem;
-  margin-left: 1rem;
-}
-
-.create__slug__input--taken {
-  border: 1px solid red;
-}
-
-.poll-options {
-  font-size: 1.5rem;
-  width: 100%;
-}
-
-.poll-option {
-  display: flex;
-  flex-direction: column;
-  justify-content: center;
-  align-items: center;
-  width: 100%;
-  margin: 0 auto;
-  align-self: center
-}
-
-.poll-option__input {
-  width: 80%;
-  margin: .2rem;
+.welcome__pollId__button {
+  border-radius: 2px 2px 25px 25px;
 }
 
 footer p, footer span {

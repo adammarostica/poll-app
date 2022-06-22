@@ -34,11 +34,13 @@ export default function Results({code}) {
     })
   }, [code]);
 
+  // Calculate the number of total votes
   useEffect(function updateVoteCount() {
     setNumTotalVotes(pollResults.reduce((prev, curr) => {
       return prev + curr[1]
     }, 0));
   }, [pollResults])
+
 
   async function handleShare() {
     const shareData = {
@@ -57,10 +59,7 @@ export default function Results({code}) {
         console.log(`Oops! I couldn't share to the world because: ${error}`);
       }
     } else {
-      // fallback code
-      console.log(
-        "Web share is currently not supported on this browser. Please provide a callback"
-      );
+      alert(`Your browser doesn't support web share. Sorry.`)
     }
   }
 

@@ -29,8 +29,8 @@ export default function Welcome() {
       <p>or</p>
       <form action="" onSubmit={handleJoin}>
         <label className="sr-only" htmlFor="pollId">Enter a poll code</label>
-        <input className="welcome__pollId" onChange={handleChange} type="text" name="pollId" id="pollId" value={userInput} placeholder="Enter a poll code and..." required></input>
-        <button>
+        <input className="welcome__pollId__input" onChange={handleChange} type="text" name="pollId" id="pollId" value={userInput} placeholder="Enter a poll code and..." required></input>
+        <button className="welcome__pollId__button">
           Join a Poll
         </button>
       </form>
