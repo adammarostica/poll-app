@@ -1,6 +1,5 @@
-import './Results.css'
 import Result from './Result';
-import {ReactComponent as LoadingBlob} from './blocks-wave.svg'
+import {ReactComponent as LoadingBlob} from './assets/blocks-wave.svg'
 import {useState, useEffect} from 'react';
 import firebase from './firebase';
 import {getDatabase, ref, onValue} from 'firebase/database';
@@ -64,7 +63,7 @@ export default function Results({code}) {
   }
 
   return (
-    <div className="results">
+    <section className="results">
       <h2>{pollQuestion}</h2>
       {
         pollResults.length > 0 ?
@@ -91,6 +90,6 @@ export default function Results({code}) {
           navigator.share && <button className="results__share__button" onClick={handleShare}>Share this poll <i class="fa-solid fa-share-nodes"></i></button>
         }
       </div>
-    </div>
+    </section>
   );
 }

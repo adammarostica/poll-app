@@ -1,4 +1,4 @@
-import './App.css';
+import './styles/App.css';
 import Welcome from './Welcome';
 import CreatePoll from './CreatePoll';
 import DisplayPoll from './DisplayPoll';

@@ -1,4 +1,3 @@
-import './Voting.css';
 import {useState, useEffect} from 'react';
 import firebase from './firebase';
 import {getDatabase, ref, update, get, increment} from 'firebase/database';
@@ -39,6 +38,12 @@ export default function Voting({code, userHasVoted, setUserHasVoted}) {
     setUserChoice(e.target.value);
   }
 
+  function handleKeyDown(e) {
+    if (e.key === 'Enter' || e.key === ' ') {
+      setUserChoice(e.target.innerText);
+    }
+  }
+
   // Submit the user's vote and note that they have voted in both state and localStorage so that <DisplayPoll /> displays <Results /> instead.
   function handleSubmit(e) {
     e.preventDefault();
@@ -57,7 +62,7 @@ export default function Voting({code, userHasVoted, setUserHasVoted}) {
   }
 
   return(
-    <div className="poll">
+    <section className="poll">
       <h2>{pollQuestion ? pollQuestion : 'Loading...'}</h2>
       
       
@@ -72,19 +77,20 @@ export default function Voting({code, userHasVoted, setUserHasVoted}) {
                 id={choice}
                 name="poll-choices"
                 value={choice}
-                checked={userChoice === choice}  
+                checked={userChoice === choice}
+                tabindex="-1"
               />
-              <label tabIndex="0" className="poll__choice__label" htmlFor={choice}>{choice}</label>
+              <label tabIndex="0" onKeyDown={handleKeyDown} className="poll__choice__label" htmlFor={choice}>{choice}</label>
             </div>
           ))
         }
         {
           userChoice
             ? <button className="poll__button" type="submit">Vote</button>
-            : <button className="poll__button poll__button--hidden" type="submit">Vote</button>
+            : <button className="poll__button poll__button--hidden" tabIndex="-1" type="submit">Vote</button>
         }
       </form>
 
-    </div>
+    </section>
   );
 }

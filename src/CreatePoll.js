@@ -1,4 +1,3 @@
-import './CreatePoll.css'
 import { useEffect, useState } from "react";
 import useDebounce from "./useDebounce";
 import { useNavigate } from "react-router-dom";
@@ -88,7 +87,7 @@ export default function CreatePoll() {
   }
 
   return (
-    <div className="create">
+    <section className="create">
       <h2>Poll Creator</h2>
       <form className="create__form" action="" onSubmit={handleSubmit}>
         <label className="sr-only" htmlFor="poll-question">What's your question?</label>
@@ -121,6 +120,6 @@ export default function CreatePoll() {
         </fieldset>
         <button className="create__button" type="submit">Create Poll</button>
       </form>
-    </div>
+    </section>
   );
 }
