@@ -18,16 +18,13 @@ export default function Voting({code, userHasVoted, setUserHasVoted}) {
     get(dbRef).then((snapshot) => {
       if (snapshot.exists()) {
         const data = snapshot.val()
+        // Ensure question ends with an interrogation mark
         let newQuestion = data.question;
         if (newQuestion[newQuestion.length -1] !== '?') {
           newQuestion += '?';
         }
         setPollQuestion(newQuestion);
-        const newChoices = [];
-        for (let item in data.options) {
-          newChoices.push(item);
-        }
-        setChoices(newChoices);
+        setChoices(data.options);
       } else {
         setPollQuestion(`We couldn't find your poll.`)
       }
@@ -43,7 +40,7 @@ export default function Voting({code, userHasVoted, setUserHasVoted}) {
       setUserChoice(e.target.innerText);
     }
   }
-
+  
   // Submit the user's vote and note that they have voted in both state and localStorage so that <DisplayPoll /> displays <Results /> instead.
   function handleSubmit(e) {
     e.preventDefault();
@@ -51,10 +48,13 @@ export default function Voting({code, userHasVoted, setUserHasVoted}) {
       alert('You have already voted in this poll.')
       return;
     }
+
     if (userChoice) {
+      // find index of chosen item to increment the corresponding entry of the votes array
+      const voteIndex = choices.indexOf(userChoice);
       const database = getDatabase(firebase);
-      update(ref(database, `${code}/options`), {
-        [userChoice]: increment(1),
+      update(ref(database, `${code}/votes`), {
+        [voteIndex]: increment(1),
       })
     }
     localStorage.setItem(code, true);
@@ -78,7 +78,7 @@ export default function Voting({code, userHasVoted, setUserHasVoted}) {
                 name="poll-choices"
                 value={choice}
                 checked={userChoice === choice}
-                tabindex="-1"
+                tabIndex="-1"
               />
               <label tabIndex="0" onKeyDown={handleKeyDown} className="poll__choice__label" htmlFor={choice}>{choice}</label>
             </div>

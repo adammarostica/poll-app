@@ -63,14 +63,14 @@ export default function CreatePoll() {
   function handleSubmit(e) {
     e.preventDefault();
     const database = getDatabase(firebase);
-    const poll = {question: pollQuestion, options: {}, order: []};
+    const poll = {question: pollQuestion, options: [], votes: []};
     pollOptions.forEach((option) => {
       if (option) {
-        poll.options[option] = 0;
-        poll.order.push(option);
+        poll.options.push(option);
+        poll.votes.push(0);
       }
     })
-    if (poll.question && Object.entries(poll.options).length > 0) {
+    if (poll.question && poll.options.length > 0) {
       if (slug === '') {
         const dbRef = ref(database);
         push(dbRef, poll)

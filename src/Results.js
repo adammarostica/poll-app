@@ -19,12 +19,10 @@ export default function Results({code}) {
     onValue(dbRef, (snapshot) => {
       if (snapshot.exists()) {
         const data = snapshot.val()
-        const newQuestion = data.question;
-        setPollQuestion(newQuestion);
-        const newResults = [];
-        for (let item in data.options) {
-          newResults.push([item, data.options[item]]);
-        }
+        setPollQuestion(data.question);
+        // Create an array of [option, votes] pairs
+        const newResults = data.options.map((option, index) => [option, data.votes[index]]);
+        // Sort them by number of votes
         newResults.sort((a, b)=> b[1] - a[1]);
         setPollResults(newResults);
       } else {
