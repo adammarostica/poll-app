@@ -3,7 +3,7 @@ import { useEffect, useState, useRef } from "react";
 import useDebounce from "./useDebounce";
 import { useNavigate } from "react-router-dom";
 import firebase from "./firebase";
-import { getDatabase, ref, push, get, set, connectDatabaseEmulator } from "firebase/database";
+import { getDatabase, ref, push, get, set } from "firebase/database";
 
 export default function CreatePoll() {
   
