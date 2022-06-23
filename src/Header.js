@@ -4,9 +4,9 @@ export default function Header() {
   return (
     <header>
       <Link to="/">
-        <h1 className="depth" title="Poll in the Wall">Poll in the Wall</h1>
+        <h1 className="header__link" title="Poll in the Wall">Poll in the Wall</h1>
       </Link>
-      <Link to="/create">
+      <Link className="header__link" to="/create">
         <p>Make your own</p>
       </Link>
     </header>
