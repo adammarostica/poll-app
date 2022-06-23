@@ -80,7 +80,7 @@ export default function Voting({code, userHasVoted, setUserHasVoted}) {
                 checked={userChoice === choice}
                 tabIndex="-1"
               />
-              <label tabIndex="0" onKeyDown={handleKeyDown} className="poll__choice__label" htmlFor={choice}>{choice}</label>
+              <label onKeyDown={handleKeyDown} className="poll__choice__label" htmlFor={choice} aria-label="poll choice" tabIndex="0">{choice}</label>
             </div>
           ))
         }

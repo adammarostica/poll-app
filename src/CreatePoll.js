@@ -141,7 +141,7 @@ export default function CreatePoll() {
       <h2>Poll Creator</h2>
       <form className="create__form" action="" onSubmit={handleSubmit}>
         <label className="sr-only" htmlFor="poll-question">What's your question?</label>
-        <textarea onChange={handleQuestionChange} value={pollQuestion} name="poll-question" id="poll-question" cols="30" rows="2" placeholder="What's your question?" required></textarea>
+        <textarea onChange={handleQuestionChange} value={pollQuestion} name="poll-question" id="poll-question" cols="30" rows="3" placeholder="What's your question?" required></textarea>
 
         <fieldset className="poll-options">
           <legend>Answers</legend>

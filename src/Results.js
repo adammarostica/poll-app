@@ -68,7 +68,7 @@ export default function Results({code}) {
           <section className="results__list">
             {
               pollResults.map((result) => (
-                <Result key={uuid()} resultValues={result} numTotalVotes={numTotalVotes} />
+                <Result key={uuid()} id={uuid()} resultValues={result} numTotalVotes={numTotalVotes} />
               ))
             }
             <div className="results__list__percentage results__list__percentage--25">25%</div>
@@ -85,7 +85,7 @@ export default function Results({code}) {
       }
       <div className="results__share">
         {
-          navigator.share && <button className="results__share__button" onClick={handleShare}>Share this poll <i class="fa-solid fa-share-nodes"></i></button>
+          navigator.share && <button className="results__share__button" onClick={handleShare}>Share this poll <i class="fa-solid fa-share-nodes results__share__icon"></i></button>
         }
       </div>
     </section>
