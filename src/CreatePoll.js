@@ -1,5 +1,5 @@
 import {ReactComponent as LoadingDots} from './assets/loading-dots.svg'
-import { useEffect, useState, useRef } from "react";
+import { useEffect, useState } from "react";
 import useDebounce from "./useDebounce";
 import { useNavigate } from "react-router-dom";
 import firebase from "./firebase";
@@ -14,7 +14,6 @@ export default function CreatePoll() {
   const debouncedSlug = useDebounce(inputSlug, 500);
   const [submissionSlug, setSubmissionSlug] = useState('');
   const navigate = useNavigate();
-  const slugNeedsVerification = useRef(false);
 
   // If each poll input has text, generate a new blank input
   useEffect(() => {
@@ -58,28 +57,23 @@ export default function CreatePoll() {
   }, [debouncedQuestion])
 
   useEffect(() => {
-
     if (debouncedSlug === '') {
       setSubmissionSlug('');
-    } else if (debouncedSlug.length > 24) {
-      setSubmissionSlug('too long');
     } else if (debouncedSlug && debouncedSlug.match(/[\s.$[\]#/]/)) {
       setSubmissionSlug('invalid slug');
       return;
-    } else if (slugNeedsVerification && debouncedSlug !== '') {
-      slugNeedsVerification.current = false;
+    } else if (debouncedSlug !== '') {
       const database = getDatabase(firebase);
       const dbRef = ref(database, `/${debouncedSlug}`);
       get(dbRef).then((snapshot) => {
         if (snapshot.exists()) {
-          setSubmissionSlug('invalid slug');
+          setSubmissionSlug('already used');
         } else {
-          setSubmissionSlug(inputSlug);
+          setSubmissionSlug(debouncedSlug);
         }
       })
     }
-
-  }, [debouncedSlug, inputSlug]);
+  }, [debouncedSlug]);
 
 
   function handleQuestionChange(e) {
@@ -93,7 +87,6 @@ export default function CreatePoll() {
   }
 
   function handleSlugChange(e) {
-    slugNeedsVerification.current = true;
     setInputSlug(e.target.value.slice(0, 24));
   }
 
@@ -176,7 +169,7 @@ export default function CreatePoll() {
           <div className="slug__input__container">
             <input className="slug__input" onChange={handleSlugChange} type="text" value={inputSlug}></input>
             {
-            submissionSlug === "invalid slug" || submissionSlug === "too long"
+            submissionSlug === "invalid slug" || submissionSlug === "already used"
               ? <i className="fa-solid fa-xmark"></i>
               : submissionSlug === "loading"
               ? <LoadingDots className="loading__dots" />
@@ -187,6 +180,8 @@ export default function CreatePoll() {
             {
               submissionSlug === "invalid slug"
                 ? <p className="slug__warning">No ., $, &#91;, &#93;, #, /, or spaces allowed</p>
+                : submissionSlug === "already used"
+                ? <p className="slug__warning">This code has already been used.</p>
                 : submissionSlug === "too long"
                 ? <p className="slug__warning">Must be 24 characters or less</p>
                 : null

@@ -199,11 +199,11 @@ footer {
 }
 
 .header__link {
-  transition: transform .3s ease-out;
+  transition: letter-spacing .3s ease-out;
 }
 
 .header__link:hover {
-  transform: scale(1.1);
+  letter-spacing: .1rem;
 }
 
 .welcome {
@@ -269,10 +269,10 @@ footer {
 
 .slug__input {
   margin: 0 .5rem;
-  padding: 0 .3rem;
+  padding: 0 1.7rem 0 .3rem;
   border-radius: 0;
   height: 1.5rem;
-  width: 12.3rem;
+  width: 13rem;
   font-size: .9rem;
 }
 
