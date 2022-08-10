@@ -1,7 +1,7 @@
 import Result from './Result';
-import {ReactComponent as LoadingBlob} from './assets/blocks-wave.svg'
+import {ReactComponent as LoadingBlob} from '../assets/blocks-wave.svg'
 import {useState, useEffect} from 'react';
-import firebase from './firebase';
+import firebase from '../firebase';
 import {getDatabase, ref, onValue} from 'firebase/database';
 import uuid from 'react-uuid';
 

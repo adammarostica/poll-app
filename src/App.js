@@ -1,9 +1,9 @@
 import './styles/App.css';
-import Welcome from './Welcome';
-import CreatePoll from './CreatePoll';
-import DisplayPoll from './DisplayPoll';
-import Header from './Header';
-import Footer from './Footer';
+import Welcome from './components/Welcome';
+import CreatePoll from './components/CreatePoll';
+import DisplayPoll from './components/DisplayPoll';
+import Header from './components/Header';
+import Footer from './components/Footer';
 import { Routes, Route } from 'react-router-dom';
 
 function App() {

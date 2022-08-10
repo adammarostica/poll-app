@@ -1,86 +1,28 @@
-import {ReactComponent as LoadingDots} from './assets/loading-dots.svg'
-import { useEffect, useState, useRef } from "react";
-import useDebounce from "./useDebounce";
+import {ReactComponent as LoadingDots} from '../assets/loading-dots.svg'
+import { useEffect, useState } from "react";
+import useDebounce from "../hooks/useDebounce";
 import { useNavigate } from "react-router-dom";
-import firebase from "./firebase";
-import { getDatabase, ref, push, get, set } from "firebase/database";
+import firebase from "../firebase";
+import { getDatabase, ref, push, set } from "firebase/database";
+import useVerifiedValue from '../hooks/useVerifiedValue';
 
 export default function CreatePoll() {
   
   const [pollQuestion, setPollQuestion] = useState('');
   const debouncedQuestion = useDebounce(pollQuestion, 500);
   const [pollOptions, setPollOptions] = useState([]);
-  const [inputSlug, setInputSlug] = useState('');
-  const debouncedSlug = useDebounce(inputSlug, 500);
-  const [submissionSlug, setSubmissionSlug] = useState('');
   const navigate = useNavigate();
-  const slugNeedsVerification = useRef(false);
+
+  const [inputSlug, setInputSlug, submissionSlug] = useVerifiedValue(debouncedQuestion);
 
   // If each poll input has text, generate a new blank input
   useEffect(() => {
-    if (pollOptions.every((option) => option.length > 0)) {
+    if (pollOptions.every((option) => option.trim().length > 0)) {
       const newOptions = [...pollOptions];
       newOptions.push('');
       setPollOptions(newOptions);
     }
   }, [pollOptions])
-
-  // When the user stops typing their question, check if a kebab-ified version of the question already exists as a Firebase property.
-  // If yes, the poll will be assigned a random code by Firebase. If no, prepare to set the poll with its custom code.
-  // i.e. 'What time should we meet?' checks to see if 'What-time-should-we-meet' is an unused code.
-  useEffect(() => {
-    try {
-      // If able to compare to the database, create a slug based on what is returned
-      if (debouncedQuestion) {
-        setSubmissionSlug('loading');
-        const slugKebab = debouncedQuestion.match(/[A-Za-z0-9]+/gi).join('-').slice(0, 24);
-        const database = getDatabase(firebase);
-        const dbRef = ref(database, `/${slugKebab}`);
-        get(dbRef).then((snapshot) => {
-          if (snapshot.exists()) {
-            setInputSlug(slugKebab.slice(0, 21) + Math.floor(Math.random() * 1000));
-            setSubmissionSlug(slugKebab.slice(0, 21) + Math.floor(Math.random() * 1000));
-          } else {
-            setInputSlug(slugKebab);
-            setSubmissionSlug(slugKebab);
-          }
-        })
-      } else {
-        // If unable to compare user question to database, set an empty slug so that the poll is pushed instead of set
-        setInputSlug('');
-        setSubmissionSlug('');
-      }
-    } catch {
-      // If there is an error, set an empty slug
-      setInputSlug('');
-      setSubmissionSlug('');
-    }
-  }, [debouncedQuestion])
-
-  useEffect(() => {
-
-    if (debouncedSlug === '') {
-      setSubmissionSlug('');
-    } else if (debouncedSlug.length > 24) {
-      setSubmissionSlug('too long');
-    } else if (debouncedSlug && debouncedSlug.match(/[\s.$[\]#/]/)) {
-      setSubmissionSlug('invalid slug');
-      return;
-    } else if (slugNeedsVerification && debouncedSlug !== '') {
-      slugNeedsVerification.current = false;
-      const database = getDatabase(firebase);
-      const dbRef = ref(database, `/${debouncedSlug}`);
-      get(dbRef).then((snapshot) => {
-        if (snapshot.exists()) {
-          setSubmissionSlug('invalid slug');
-        } else {
-          setSubmissionSlug(inputSlug);
-        }
-      })
-    }
-
-  }, [debouncedSlug, inputSlug]);
-
 
   function handleQuestionChange(e) {
     setPollQuestion(e.target.value);
@@ -93,7 +35,6 @@ export default function CreatePoll() {
   }
 
   function handleSlugChange(e) {
-    slugNeedsVerification.current = true;
     setInputSlug(e.target.value.slice(0, 24));
   }
 
@@ -113,7 +54,7 @@ export default function CreatePoll() {
     const database = getDatabase(firebase);
     const poll = {question: pollQuestion, options: [], votes: []};
     pollOptions.forEach((option) => {
-      if (option) {
+      if (option.trim().length > 0) {
         poll.options.push(option);
         poll.votes.push(0);
       }
@@ -132,7 +73,7 @@ export default function CreatePoll() {
       }
       
     } else {
-      console.log('nope');
+      console.error('nope');
     }
   }
 
@@ -176,7 +117,7 @@ export default function CreatePoll() {
           <div className="slug__input__container">
             <input className="slug__input" onChange={handleSlugChange} type="text" value={inputSlug}></input>
             {
-            submissionSlug === "invalid slug" || submissionSlug === "too long"
+            submissionSlug === "invalid slug" || submissionSlug === "already used"
               ? <i className="fa-solid fa-xmark"></i>
               : submissionSlug === "loading"
               ? <LoadingDots className="loading__dots" />
@@ -186,7 +127,9 @@ export default function CreatePoll() {
             }
             {
               submissionSlug === "invalid slug"
-                ? <p className="slug__warning">No ., $, &#91;, &#93;, #, /, or spaces allowed</p>
+                ? <p className="slug__warning">Your custom address can only contain letters, numbers, and dashes.</p>
+                : submissionSlug === "already used"
+                ? <p className="slug__warning">This code has already been used.</p>
                 : submissionSlug === "too long"
                 ? <p className="slug__warning">Must be 24 characters or less</p>
                 : null
