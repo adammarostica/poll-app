@@ -5,7 +5,7 @@ import { initializeApp } from "firebase/app";
 
 // Your web app's Firebase configuration
 const firebaseConfig = {
-  apiKey: "AIzaSyDaNPAdqRNDVFNViNCr0P35pQ4G5VebL3o",
+  apiKey: "op://Adam/wwdf-firebase/api key",
   authDomain: "what-are-we-doing-friends.firebaseapp.com",
   databaseURL: "https://what-are-we-doing-friends-default-rtdb.firebaseio.com",
   projectId: "what-are-we-doing-friends",

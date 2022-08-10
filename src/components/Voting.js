@@ -1,5 +1,5 @@
 import {useState, useEffect} from 'react';
-import firebase from './firebase';
+import firebase from '../firebase';
 import {getDatabase, ref, update, get, increment} from 'firebase/database';
 import uuid from 'react-uuid';
 
